@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Route, Link} from 'react-router-dom'
 import axios from 'axios'
-import Stories from './Stories'
+import AllStories from './AllStories'
 import Comments from './Comments'
 
 export default class SingleAuthor extends Component {
@@ -50,7 +50,7 @@ export default class SingleAuthor extends Component {
         <hr />
         <div>
           <Route path='/authors/:authorId/comments' render={() => <Comments comments={author.comments} />} />
-          <Route path='/authors/:authorId/stories' render={() => <Stories stories={author.stories} />} />
+          <Route path='/authors/:authorId/stories' render={() => <AllStories stories={author.stories} />} />
         </div>
       </div>
     )

@@ -1,30 +1,33 @@
-import React, {Component} from 'react'
-import axios from 'axios'
-import Stories from './Stories'
+import React from 'react'
+import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-export default class AllStories extends Component {
-  constructor () {
-    super()
-    this.state = {
-      stories: []
-    }
-  }
+const AllStories = (props) => {
+  const stories = props.stories
 
-  async componentDidMount () {
-    try {
-      const response = await axios.get('/api/stories')
-      this.setState({ stories: response.data })
-    }
-    catch (error) {
-      console.trace(error)
-    }
-  }
+  return (
+    <div id='stories' className='column'>
+      {
+        stories.map(story => (
+          <div className='story' key={story.id}>
+            <Link to={`/stories/${story.id}`}>
+              <h3>{story.title}</h3>
+            </Link>
+            <Link to={`/authors/${story.author.id}`}>
+              <p>{story.author.name}</p>
+            </Link>
+            <hr />
+          </div>
+        ))
+      }
+    </div>
+  )
+}
 
-  render () {
-    const stories = this.state.stories
-
-    return (
-      <Stories stories={stories} />
-    )
+const mapStateToProps = (state) => {
+  return {
+    stories: state.stories
   }
 }
+
+export default connect(mapStateToProps)(AllStories)
