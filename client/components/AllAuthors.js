@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
 
-const Authors = (props) => {
+const AllAuthors = (props) => {
   const authors = props.authors
 
   return (
@@ -28,4 +28,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(Authors)
+export default connect(mapStateToProps)(AllAuthors)

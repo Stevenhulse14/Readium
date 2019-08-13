@@ -24,10 +24,4 @@ const Comments = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    comments: state.singleAuthor.comments
-  }
-}
-
-export default connect(mapStateToProps)(Comments)
+export default Comments

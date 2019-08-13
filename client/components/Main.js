@@ -2,8 +2,8 @@ import React from 'react'
 import {Route} from 'react-router-dom'
 import Navbar from './Navbar'
 
-import Stories from './Stories'
-import Authors from './Authors'
+import AllStories from './AllStories'
+import AllAuthors from './AllAuthors'
 import SingleStory from './SingleStory'
 import SingleAuthor from './SingleAuthor'
 
@@ -27,11 +27,11 @@ class Main extends React.Component {
           </div>
           <Navbar />
         </div>
-        <Route exact path='/stories' component={Stories} />
-        <Route exact path='/authors' component={Authors} />
+        <Route exact path='/stories' component={AllStories} />
+        <Route exact path='/authors' component={AllAuthors} />
         <Route path='/stories/:storyId' component={SingleStory} />
         <Route path='/authors/:authorId' component={SingleAuthor} />
-        <Route exact path='/' component={Stories} />
+        <Route exact path='/' component={AllStories} />
       </div>
     )
   }

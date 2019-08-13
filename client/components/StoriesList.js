@@ -1,9 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
 
-const Stories = (props) => {
-  const stories = props.match.params.authorId ? props.authorStories : props.allStories
+const StoriesList = (props) => {
+  const stories = props.stories
 
   return (
     <div id='stories' className='column'>
@@ -24,11 +23,4 @@ const Stories = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allStories: state.stories,
-    authorStories: state.singleAuthor.stories
-  }
-}
-
-export default connect(mapStateToProps)(Stories)
+export default StoriesList

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Route, Link} from 'react-router-dom'
-import Stories from './Stories'
 import Comments from './Comments'
+import AuthorStories from './AuthorStories'
 import { connect } from 'react-redux';
 
 import {fetchSingleAuthor, fetchAuthorComments, fetchAuthorStories} from '../store/singleAuthor'
@@ -22,6 +22,7 @@ class SingleAuthor extends Component {
 
   render () {
     const author = this.props.author.info
+    const comments = this.props.author.comments
 
     return (
       <div id='single-author' className='column'>
@@ -38,8 +39,8 @@ class SingleAuthor extends Component {
         </div>
         <hr />
         <div>
-          <Route path='/authors/:authorId/comments' component={Comments} />
-          <Route path='/authors/:authorId/stories' component={Stories} />
+          <Route path='/authors/:authorId/comments' render={() => <Comments comments={comments} />} />
+          <Route path='/authors/:authorId/stories' component={AuthorStories} />
         </div>
       </div>
     )
