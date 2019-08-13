@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Route, Link} from 'react-router-dom'
-import axios from 'axios'
-import AllStories from './AllStories'
+import Stories from './Stories'
 import Comments from './Comments'
 import { connect } from 'react-redux';
 
@@ -23,9 +22,6 @@ class SingleAuthor extends Component {
 
   render () {
     const author = this.props.author.info
-    const comments = this.props.author.comments
-    const stories = this.props.author.stories
-
 
     return (
       <div id='single-author' className='column'>
@@ -42,8 +38,8 @@ class SingleAuthor extends Component {
         </div>
         <hr />
         <div>
-          <Route path='/authors/:authorId/comments' render={() => <Comments comments={comments} />} />
-          <Route path='/authors/:authorId/stories' render={(routeProps) => <AllStories {...routeProps} authorStories={stories} />} />
+          <Route path='/authors/:authorId/comments' component={Comments} />
+          <Route path='/authors/:authorId/stories' component={Stories} />
         </div>
       </div>
     )

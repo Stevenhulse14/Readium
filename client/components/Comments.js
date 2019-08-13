@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 const Comments = (props) => {
   const comments = props.comments || []
@@ -23,4 +24,10 @@ const Comments = (props) => {
   )
 }
 
-export default Comments
+const mapStateToProps = (state) => {
+  return {
+    comments: state.singleAuthor.comments
+  }
+}
+
+export default connect(mapStateToProps)(Comments)

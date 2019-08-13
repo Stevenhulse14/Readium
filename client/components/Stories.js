@@ -2,8 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-const AllStories = (props) => {
-  const stories = props.match.params.authorId ? props.authorStories : props.stories
+const Stories = (props) => {
+  const stories = props.match.params.authorId ? props.authorStories : props.allStories
 
   return (
     <div id='stories' className='column'>
@@ -26,8 +26,9 @@ const AllStories = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    stories: state.stories
+    allStories: state.stories,
+    authorStories: state.singleAuthor.stories
   }
 }
 
-export default connect(mapStateToProps)(AllStories)
+export default connect(mapStateToProps)(Stories)

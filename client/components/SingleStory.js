@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Comments from './Comments'
 import { connect } from 'react-redux';
 import { fetchSingleStory } from '../store/singleStory';
