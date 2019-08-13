@@ -1,8 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
 
-const Comments = (props) => {
+const CommentsList = (props) => {
   const comments = props.comments || []
 
   return (
@@ -24,4 +23,4 @@ const Comments = (props) => {
   )
 }
 
-export default Comments
+export default CommentsList

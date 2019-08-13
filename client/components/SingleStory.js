@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Comments from './Comments'
+import CommentsList from './CommentsList'
 import { connect } from 'react-redux';
 import { fetchSingleStory } from '../store/singleStory';
 
@@ -27,7 +27,7 @@ class SingleStory extends Component {
           content.split('\n').map((line, idx) => <p key={idx}>{line}</p>)
         }
         <h3>Responses:</h3>
-        <Comments comments={comments} />
+        <CommentsList comments={comments} />
       </div>
     )
   }

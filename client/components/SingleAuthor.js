@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Route, Link} from 'react-router-dom'
-import Comments from './Comments'
+import CommentsList from './CommentsList'
 import AuthorStories from './AuthorStories'
 import { connect } from 'react-redux';
 
@@ -39,7 +39,7 @@ class SingleAuthor extends Component {
         </div>
         <hr />
         <div>
-          <Route path='/authors/:authorId/comments' render={() => <Comments comments={comments} />} />
+          <Route path='/authors/:authorId/comments' render={() => <CommentsList comments={comments} />} />
           <Route path='/authors/:authorId/stories' component={AuthorStories} />
         </div>
       </div>
