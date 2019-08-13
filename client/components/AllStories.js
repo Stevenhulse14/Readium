@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 const AllStories = (props) => {
-  const stories = props.stories
+  const stories = props.match.params.authorId ? props.authorStories : props.stories
 
   return (
     <div id='stories' className='column'>

@@ -1,19 +1,14 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import Comments from './Comments'
+import { connect } from 'react-redux';
+import { fetchSingleStory } from '../store/singleStory';
 
-export default class SingleStory extends Component {
-  constructor () {
-    super()
-    this.state = {
-      story: {}
-    }
-  }
+class SingleStory extends Component {
 
-  async componentDidMount () {
+  componentDidMount () {
     try {
-      const storiesResponse = await axios.get(`/api/stories/${this.props.match.params.storyId}`)
-      this.setState({ story: storiesResponse.data })
+      this.props.loadSingleStory(this.props.match.params.storyId)
     }
     catch (error) {
       console.error(error)
@@ -21,11 +16,12 @@ export default class SingleStory extends Component {
   }
 
   render () {
-    const story = this.state.story
+    const story = this.props.story
     const content = story.content || ''
-    const comments = this.state.story.comments
+    const comments = story.comments
 
     return (
+      // <h1>hi</h1>
       <div id='single-story' className='column'>
         <h1>{story.title}</h1>
         {
@@ -37,3 +33,17 @@ export default class SingleStory extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    story: state.singleStory
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadSingleStory: (id) => dispatch(fetchSingleStory(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleStory)

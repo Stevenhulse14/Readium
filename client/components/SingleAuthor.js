@@ -3,28 +3,18 @@ import {Route, Link} from 'react-router-dom'
 import axios from 'axios'
 import AllStories from './AllStories'
 import Comments from './Comments'
+import { connect } from 'react-redux';
 
-export default class SingleAuthor extends Component {
-  constructor () {
-    super()
-    this.state = {
-      author: {}
-    }
-  }
+import {fetchSingleAuthor, fetchAuthorComments, fetchAuthorStories} from '../store/singleAuthor'
 
-  async componentDidMount () {
+class SingleAuthor extends Component {
+
+  componentDidMount () {
     try {
       const authorId = this.props.match.params.authorId
-      const authorPath = `/api/authors/${authorId}`
-      const responses = await Promise.all([
-        axios.get(authorPath),
-        axios.get(`${authorPath}/stories`),
-        axios.get(`${authorPath}/comments`)
-      ])
-      const [author, stories, comments] = responses.map(res => res.data)
-      author.stories = stories
-      author.comments = comments
-      this.setState({author})
+      this.props.loadSingleAuthor(authorId)
+      this.props.loadAuthorComments(authorId)
+      this.props.loadAuthorStories(authorId)
     }
     catch (error) {
       console.error(error)
@@ -32,7 +22,10 @@ export default class SingleAuthor extends Component {
   }
 
   render () {
-    const author = this.state.author
+    const author = this.props.author.info
+    const comments = this.props.author.comments
+    const stories = this.props.author.stories
+
 
     return (
       <div id='single-author' className='column'>
@@ -49,10 +42,26 @@ export default class SingleAuthor extends Component {
         </div>
         <hr />
         <div>
-          <Route path='/authors/:authorId/comments' render={() => <Comments comments={author.comments} />} />
-          <Route path='/authors/:authorId/stories' render={() => <AllStories stories={author.stories} />} />
+          <Route path='/authors/:authorId/comments' render={() => <Comments comments={comments} />} />
+          <Route path='/authors/:authorId/stories' render={(routeProps) => <AllStories {...routeProps} authorStories={stories} />} />
         </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    author: state.singleAuthor
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadSingleAuthor: (id) => dispatch(fetchSingleAuthor(id)),
+    loadAuthorComments: (id) => dispatch(fetchAuthorComments(id)),
+    loadAuthorStories: (id) => dispatch(fetchAuthorStories(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleAuthor)

@@ -29,7 +29,8 @@ class Main extends React.Component {
         </div>
         <Route exact path='/stories' component={AllStories} />
         <Route exact path='/authors' component={AllAuthors} />
-        {/* <Route path='/authors/:authorId' component={SingleAuthor} /> */}
+        <Route path='/stories/:storyId' component={SingleStory} />
+        <Route path='/authors/:authorId' component={SingleAuthor} />
         <Route exact path='/' component={AllStories} />
       </div>
     )
