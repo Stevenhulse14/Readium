@@ -40,7 +40,7 @@ export const fetchSingleAuthor = (id) => {
 export const fetchAuthorComments = (id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`api/authors/${id}/comments`)
+      const {data} = await axios.get(`/api/authors/${id}/comments`)
       dispatch(setAuthorComments(data))
     } catch (err) {
       console.log(err)
@@ -51,7 +51,7 @@ export const fetchAuthorComments = (id) => {
 export const fetchAuthorStories= (id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`api/authors/${id}/stories`)
+      const {data} = await axios.get(`/api/authors/${id}/stories`)
       dispatch(setAuthorStories(data))
     } catch (err) {
       console.log(err)
